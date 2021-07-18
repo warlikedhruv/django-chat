@@ -105,7 +105,6 @@ def url_status(channel_name, url):
 def url_status(channel_name, url):
     import nltk
     import numpy as np
-    nltk.download('punkt')
     from keras.models import load_model
     model = load_model('static/model_attention.h5')
     import json
