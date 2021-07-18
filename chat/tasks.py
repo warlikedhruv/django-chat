@@ -107,11 +107,11 @@ def url_status(channel_name, url):
     import numpy as np
     nltk.download('punkt')
     from keras.models import load_model
-    model = load_model('model_attention.h5')
+    model = load_model('static/model_attention.h5')
     import json
 
     # Opening JSON file
-    with open('vocab.json') as json_file:
+    with open('static/vocab.json') as json_file:
         vocab = json.load(json_file)
     WORD_CODE_START = 1
     WORD_CODE_PADDING = 0
@@ -128,7 +128,7 @@ def url_status(channel_name, url):
 
     decoding[len(encoding) + 2] = ''
     encoding['<UNK>'] = len(encoding) + 2
-    output = prediction(raw_input)
+    output = prediction(url)
 
     message = str(output)
     async_to_sync(channel_layer.send)(channel_name, {"type": "chat.message", "message": message})
