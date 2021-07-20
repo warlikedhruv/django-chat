@@ -2,24 +2,12 @@ import json
 
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
-
+import openai
+from django.conf import settings
+openai.api_key = settings.OPEN_AI_KEY
 from . import tasks
 
-COMMANDS = {
-    'help': {
-        'help': 'Display help message.',
-    },
-    'sum': {
-        'args': 2,
-        'help': 'Calculate sum of two integer arguments. Example: `sum 12 32`.',
-        'task': 'add'
-    },
-    'status': {
-        'args': 1,
-        'help': 'Check website status. Example: `status twitter.com`.',
-        'task': 'url_status'
-    },
-}
+
 
 class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data):
@@ -27,8 +15,14 @@ class ChatConsumer(WebsocketConsumer):
         message = text_data_json['message']
 
         response_message = message
+        temp = openai.Completion.create(
+            engine="ada",
+            prompt="anyway i talked to priyesh today",
+            max_tokens=10
+        )
 
-        
+        rsp_msg = temp["choices"][0]["text"]
+        response_message = rsp_msg
         async_to_sync(self.channel_layer.send)(
                 self.channel_name,
                 {
