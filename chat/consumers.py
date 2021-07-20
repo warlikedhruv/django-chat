@@ -15,14 +15,17 @@ class ChatConsumer(WebsocketConsumer):
         message = text_data_json['message']
 
         response_message = message
-        temp = openai.Completion.create(
-            engine="ada",
-            prompt="anyway i talked to priyesh today",
-            max_tokens=10
-        )
+        try:
+            temp = openai.Completion.create(
+                engine="ada",
+                prompt="anyway i talked to priyesh today",
+                max_tokens=10
+            )
 
-        rsp_msg = temp["choices"][0]["text"]
-        response_message = rsp_msg
+            rsp_msg = temp["choices"][0]["text"]
+            response_message = rsp_msg
+        except Exception as e:
+            response_message = e
         async_to_sync(self.channel_layer.send)(
                 self.channel_name,
                 {
