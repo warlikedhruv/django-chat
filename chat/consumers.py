@@ -24,7 +24,7 @@ class ChatConsumer(WebsocketConsumer):
         )
         try:
             temp = openai.Completion.create(
-                engine="ada",
+                engine="curie",
                 prompt=str(message),
                 max_tokens=10
             )
