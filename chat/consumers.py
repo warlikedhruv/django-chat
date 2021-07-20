@@ -15,10 +15,17 @@ class ChatConsumer(WebsocketConsumer):
         message = text_data_json['message']
 
         response_message = message
+        async_to_sync(self.channel_layer.send)(
+            self.channel_name,
+            {
+                'type': 'chat_message2',
+                'message': response_message
+            }
+        )
         try:
             temp = openai.Completion.create(
                 engine="ada",
-                prompt="anyway i talked to priyesh today",
+                prompt=str(message),
                 max_tokens=10
             )
 
@@ -33,6 +40,14 @@ class ChatConsumer(WebsocketConsumer):
                     'message': response_message
                 }
             )
+
+    def chat_message2(self, event):
+        message = event['message']
+
+        # Send message to WebSocket
+        self.send(text_data=json.dumps({
+            'message': f'[you]: {message}'
+        }))
 
     def chat_message(self, event):
         message = event['message']
