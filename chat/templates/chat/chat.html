@@ -14,7 +14,7 @@
         );
 
     chatSocket.onopen = function(e) {
-        document.querySelector('#chat-log').value += ('Welcome to the Django Chatbot.\nPlease type `help` for the commands list.\n')    
+        document.querySelector('#chat-log').value += ('Welcome to the Django Chatbot.')    
     }
 
     chatSocket.onmessage = function(e) {
