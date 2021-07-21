@@ -21,6 +21,10 @@
       "OPENAI_SECRET_KEY": {
         "description": "A secret key for open ai api",
         "value": ""
+      },
+      "MODEL_KEY": {
+        "description": "ID OF FINED TUNED MODEL",
+        "value": ""
       }
     },
     "formation": {

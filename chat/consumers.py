@@ -5,6 +5,7 @@ from channels.generic.websocket import WebsocketConsumer
 import openai
 from django.conf import settings
 openai.api_key = settings.OPEN_AI_KEY
+model_key = settings.MODEL_KEY
 from . import tasks
 
 
@@ -26,7 +27,7 @@ class ChatConsumer(WebsocketConsumer):
             temp = openai.Completion.create(
                 prompt=str(response_message), stop=['\nHuman'], temperature=0.7,
                 top_p=1, frequency_penalty=1, presence_penalty=0.6, best_of=1,
-                max_tokens=25, model="curie:ft-user-89xdmsdkui13sv2fqkxwbcli-2021-07-21-04-01-39"
+                max_tokens=25, model=str(model_key)
             )
 
             rsp_msg = temp["choices"][0]["text"].strip()
