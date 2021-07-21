@@ -24,7 +24,7 @@ class ChatConsumer(WebsocketConsumer):
         )
         try:
             temp = openai.Completion.create(
-                prompt=str(message), engine="curie", temperature=0.7,
+                prompt=str(message), engine="curie", stop=['\nHuman'], temperature=0.7,
                 top_p=1, frequency_penalty=1, presence_penalty=0.6, best_of=1,
                 max_tokens=25
             )
