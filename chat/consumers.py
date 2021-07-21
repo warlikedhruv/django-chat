@@ -24,9 +24,9 @@ class ChatConsumer(WebsocketConsumer):
         )
         try:
             temp = openai.Completion.create(
-                prompt=str(message), engine="curie", stop=['\nHuman'], temperature=0.7,
+                prompt=str(response_message), stop=['\nHuman'], temperature=0.7,
                 top_p=1, frequency_penalty=1, presence_penalty=0.6, best_of=1,
-                max_tokens=25
+                max_tokens=25, model="curie:ft-user-89xdmsdkui13sv2fqkxwbcli-2021-07-21-04-01-39"
             )
 
             rsp_msg = temp["choices"][0]["text"].strip()
