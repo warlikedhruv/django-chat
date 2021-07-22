@@ -27,7 +27,7 @@ class ChatConsumer(WebsocketConsumer):
             temp = openai.Completion.create(
                 prompt=str(response_message), stop=['\nHuman'], temperature=0.7,
                 top_p=1, frequency_penalty=1, presence_penalty=0.6, best_of=1,
-                max_tokens=25, model=str(model_key)
+                max_tokens=50, model=str(model_key)
             )
 
             rsp_msg = temp["choices"][0]["text"].strip()
