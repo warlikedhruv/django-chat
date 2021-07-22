@@ -11,8 +11,8 @@
       "chatbot",
       "websockets"
     ],
-    "website": "https://github.com/inoks/django-chatbot/",
-    "repository": "https://github.com/inoks/django-chatbot/",
+    "website": "https://github.com/warlikedhruv/django-chat",
+    "repository": "https://github.com/warlikedhruv/django-chat/",
     "env": {
       "DJANGO_SECRET_KEY": {
         "description": "A secret key for a particular Django installation.",
