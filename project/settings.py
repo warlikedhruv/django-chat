@@ -25,6 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 OPEN_AI_KEY = os.environ['OPENAI_SECRET_KEY']
 MODEL_KEY = os.environ['MODEL_KEY']
+BOT_NAME = os.environ['BOT_NAME']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

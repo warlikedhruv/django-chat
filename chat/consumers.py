@@ -6,6 +6,7 @@ import openai
 from django.conf import settings
 openai.api_key = settings.OPEN_AI_KEY
 model_key = settings.MODEL_KEY
+bot_name = settings.BOT_NAME
 from . import tasks
 
 
@@ -55,5 +56,5 @@ class ChatConsumer(WebsocketConsumer):
 
         # Send message to WebSocket
         self.send(text_data=json.dumps({
-            'message': f'[bot]: {message}'
+            'message': f'[{bot_name}]: {message}'
         }))
