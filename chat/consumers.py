@@ -26,12 +26,14 @@ class ChatConsumer(WebsocketConsumer):
         )
         try:
             temp = openai.Completion.create(
-                prompt=str(response_message), stop=['\nHuman'], temperature=0.7,
+                prompt=str(response_message), stop=[r" \\n"], temperature=0.7,
                 top_p=1, frequency_penalty=1, presence_penalty=0.6, best_of=1,
                 max_tokens=50, model=str(model_key)
             )
-
-            rsp_msg = temp["choices"][0]["text"].strip()
+            try:
+                rsp_msg = temp["choices"][0]["text"].split(":", 1)[1]
+            except:
+                rsp_msg = temp["choices"][0]["text"].strip()
             response_message = rsp_msg
         except Exception as e:
             response_message = e
