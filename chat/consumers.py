@@ -26,7 +26,7 @@ class ChatConsumer(WebsocketConsumer):
         )
         try:
             temp = openai.Completion.create(
-                prompt=str(response_message)+"\n\n###\n\n", stop=[" #END"], temperature=0.7,
+                prompt=str(response_message)+"\n\n###\n\n", stop=[" #END", "\n\n###\n\n"], temperature=0.7,
                 top_p=1, frequency_penalty=1, presence_penalty=0.6, best_of=1,
                 max_tokens=50, model=str(model_key)
             )
